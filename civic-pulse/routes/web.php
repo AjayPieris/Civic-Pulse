@@ -20,3 +20,9 @@ Route::post('/issues', [IssueController::class, 'store']);
 // The '{issue}' acts as a wildcard. 
 // If user visits /issues/1, Laravel knows $issue = Issue with ID 1.
 Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
+
+// Show the edit form
+Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issues.edit');
+
+// Save the changes (Note: We use PUT for updates)
+Route::put('/issues/{issue}', [IssueController::class, 'update'])->name('issues.update');

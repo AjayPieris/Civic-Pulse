@@ -44,4 +44,31 @@ class IssueController extends Controller
     {
         return view('issues.show', ['issue' => $issue]);
     }
+
+   // 5. Show the Edit Form (filled with existing data)
+   // 5. Show the Edit Form (filled with existing data)
+    public function edit(Issue $issue)
+    {
+        return view('issues.edit', ['issue' => $issue]);
+    }
+
+    // 6. Save the Changes
+    public function update(Request $request, Issue $issue)
+    {
+        // 1. Validate (Security)
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        // 2. Update the data
+        $issue->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => 'Pending' // Optional: reset status or keep it? Let's reset for now.
+        ]);
+
+        // 3. Redirect back to the details page
+        return redirect()->route('issues.show', $issue->id);
+    }
 }
