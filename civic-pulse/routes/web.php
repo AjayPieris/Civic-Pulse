@@ -9,26 +9,30 @@ Route::get('/', function () {
 });
 
 
-// Show the list
-Route::get('/issues', [IssueController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    // Show the form
+    Route::get('/issues/create', [IssueController::class, 'create'])->name('issues.create');
 
-// Show the form
-Route::get('/issues/create', [IssueController::class, 'create']);
+    // Handle form submission
+    Route::post('/issues', [IssueController::class, 'store']);
 
-// Handle the form submission (Note: This is a POST request)
-Route::post('/issues', [IssueController::class, 'store']);
+    // Show the edit form
+    Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issues.edit');
 
-// The '{issue}' acts as a wildcard. 
-// If user visits /issues/1, Laravel knows $issue = Issue with ID 1.
+    // Save the changes (PUT)
+    Route::put('/issues/{issue}', [IssueController::class, 'update'])->name('issues.update');
+
+    // Handle the delete request (DELETE)
+    Route::delete('/issues/{issue}', [IssueController::class, 'destroy'])->name('issues.destroy');
+});
+
+
+// These routes should still be public
+Route::get('/issues', [IssueController::class, 'index'])->name('issues.index');
 Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
 
-// Show the edit form
-Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issues.edit');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-// Save the changes (Note: We use PUT for updates)
-Route::put('/issues/{issue}', [IssueController::class, 'update'])->name('issues.update');
-
-Route::delete('/issues/{issue}', [IssueController::class, 'destroy'])->name('issues.destroy');
-
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// Logout Route (Must be POST for security)
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
