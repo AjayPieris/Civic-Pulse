@@ -35,7 +35,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirect user to /issues page -------------------
-        return redirect('/issues')->with('success', 'Account created successfully!');
+        return redirect('/')->with('success', 'Account created successfully!');
     }
 
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
             $request->session()->regenerate();      // Prevent session fixation (security)
 
             // Redirect to intended page or /issues -------
-            return redirect()->intended('/issues')
+            return redirect()->intended('/')
                    ->with('success', 'Welcome back!');
         }
 
@@ -78,7 +78,7 @@ class AuthController extends Controller
         $request->session()->invalidate();           // Destroy old session
         $request->session()->regenerateToken();      // Create a new CSRF token
 
-        return redirect('/issues')                   // Redirect user
+        return redirect('/')                   // Redirect user
                ->with('status', 'You have been logged out.');
     }
 }

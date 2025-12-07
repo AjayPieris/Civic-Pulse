@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // These routes should still be public
-Route::get('/issues', [IssueController::class, 'index'])->name('issues.index');
+Route::get('/', [IssueController::class, 'index'])->name('issues.index');
 Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

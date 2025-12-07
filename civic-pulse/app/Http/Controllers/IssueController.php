@@ -44,7 +44,7 @@ class IssueController extends Controller
             'user_id' => Auth::id() 
         ]);
 
-        return redirect('/issues')->with('success', 'Issue created successfully!');
+        return redirect('/')->with('success', 'Issue created successfully!');
     }
 
     // 4. Show a single issue
@@ -106,7 +106,7 @@ class IssueController extends Controller
         // Delete the issue from DB
         $issue->delete();
 
-        return redirect('/issues')->with('success', 'Issue deleted successfully.');
+        return redirect('/')->with('success', 'Issue deleted successfully.');
     }
 
     // 8. Update Status (Admin Only)

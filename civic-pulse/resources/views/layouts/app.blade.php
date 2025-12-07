@@ -73,7 +73,7 @@
          :class="scrolled ? 'bg-slate-900/70 shadow-lg shadow-black/20' : 'bg-slate-900/40 shadow-none'">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex h-16 items-center justify-between">
-                <a href="/issues"
+                <a href="/"
                    class="group inline-flex items-center gap-2 font-bold text-xl tracking-tight">
                     <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-900/30 ring-1 ring-white/10">
                         📢
