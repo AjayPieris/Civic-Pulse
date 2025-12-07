@@ -1,33 +1,35 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>CivicPulse - Local Issues</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@section('title', 'All Issues')
 
-<body class="bg-gray-100 p-10">
-    <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
-        <h1 class="text-3xl font-bold mb-4">Reported Issues</h1>
-        <a href="/issues/create" class="inline-block bg-blue-500 text-white px-4 py-2 rounded mb-4">
-            + Report New Issue
-        </a>
-        @foreach ($issues as $issue)
-        <div class="border-b p-4">
-            <h2 class="text-xl font-semibold hover:text-blue-600">
-                <a href="{{ route('issues.show', $issue->id) }}">
-                    {{ $issue->title }}
-                </a>
-            </h2>
-            <p class="text-gray-600">{{ $issue->description }}</p>
-            <span class="bg-yellow-200 text-yellow-800 px-2 py-1 text-sm rounded">{{ $issue->status }}</span>
+@section('content')
+    <h1 class="text-3xl font-bold mb-6">Reported Issues</h1>
+
+    @if ($issues->isEmpty())
+        <div class="bg-white p-6 rounded shadow text-center">
+            <p class="text-gray-500">No issues reported yet.</p>
         </div>
-        @endforeach
-
-        @if ($issues->isEmpty())
-        <p class="text-gray-500 mt-4">No issues reported yet. Good job, citizens!</p>
-        @endif
-    </div>
-</body>
-
-</html>
+    @else
+        <div class="space-y-4">
+            @foreach ($issues as $issue)
+                <div class="bg-white p-6 rounded shadow hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            <a href="{{ route('issues.show', $issue->id) }}" class="hover:text-blue-600">
+                                {{ $issue->title }}
+                            </a>
+                        </h2>
+                        <span class="px-2 py-1 text-xs font-bold uppercase rounded 
+                            {{ $issue->status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800' }}">
+                            {{ $issue->status }}
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mt-2 line-clamp-2">{{ $issue->description }}</p>
+                    <div class="text-sm text-gray-400 mt-4">
+                        Reported {{ $issue->created_at->diffForHumans() }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+@endsection

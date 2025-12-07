@@ -13,26 +13,36 @@ class IssueController extends Controller
         return view('issues.index', ['issues' => $issues]);
     }
 
-    // 2. Show the "Create New Issue" form
+    // 2. Show the "Create  New Issue" form
     public function create() {
         return view('issues.create');
     }
 
     // 3. Store the data from the form
-    public function store(Request $request) {
-        // Validate the data (Security Check)
+   public function store(Request $request) {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required'
+            // Must be required, and at least 5 characters long, max 50 characters
+            'title' => 'required|min:5|max:50',
+            
+            // Must be required, at least 10 characters
+            'description' => 'required|min:10',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Max 2MB
         ]);
 
-        // Create the issue (The Shortcut method you just learned!)
+        // Handle File Upload
+    $path = null;
+    if ($request->hasFile('image')) {
+        // This stores the image in 'storage/app/public/issues'
+        // It returns the path (e.g., "issues/xgY7s...jpg")
+        $path = $request->file('image')->store('issues', 'public');
+    }
+
         Issue::create([
             'title' => $request->title,
             'description' => $request->description,
+            'image_path' => $path, // Save the path (or null)
         ]);
 
-        // Go back to the list
         return redirect('/issues');
     }
 
@@ -70,5 +80,14 @@ class IssueController extends Controller
 
         // 3. Redirect back to the details page
         return redirect()->route('issues.show', $issue->id);
+    }
+
+    public function destroy(Issue $issue)
+    {
+        // Delete the issue
+        $issue->delete();
+
+        // Redirect back to the list
+        return redirect('/issues');
     }
 }

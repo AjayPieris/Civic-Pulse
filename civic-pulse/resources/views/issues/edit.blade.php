@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Issue</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-10">
+@extends('layouts.app')
+
+@section('title', 'Edit Issue')
+@section('content')
     <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
         <h1 class="text-3xl font-bold mb-6">Edit Issue</h1>
 
@@ -32,5 +29,4 @@
             <a href="{{ route('issues.show', $issue->id) }}" class="ml-4 text-gray-600">Cancel</a>
         </form>
     </div>
-</body>
-</html>
+@endsection

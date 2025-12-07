@@ -26,3 +26,5 @@ Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issu
 
 // Save the changes (Note: We use PUT for updates)
 Route::put('/issues/{issue}', [IssueController::class, 'update'])->name('issues.update');
+
+Route::delete('/issues/{issue}', [IssueController::class, 'destroy'])->name('issues.destroy');
