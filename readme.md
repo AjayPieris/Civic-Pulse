@@ -1,7 +1,5 @@
 # 📢 CivicPulse — Community Issue Tracker
 
-CivicPulse is a full‑stack web application that connects citizens with local authorities to streamline reporting and resolution of infrastructure issues (potholes, broken streetlights, etc.). Citizens can submit reports with images, while administrators manage statuses and track progress.
-
 <p align="center">
   <img src="screenshots/dashboard.png" alt="CivicPulse Dashboard" width="85%" />
 </p>
@@ -9,6 +7,7 @@ CivicPulse is a full‑stack web application that connects citizens with local a
 <p align="center">
   <a href="#-features">Features</a> •
   <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-used-languages--icons">Used Languages & Icons</a> •
   <a href="#-screenshots">Screenshots</a> •
   <a href="#-installation-guide">Installation</a> •
   <a href="#-admin-setup">Admin Setup</a> •
@@ -55,6 +54,32 @@ CivicPulse is a full‑stack web application that connects citizens with local a
 
 ---
 
+## 🔤 Used Languages & Icons
+
+<p align="left">
+  <!-- Shields (quick badges) -->
+  <img alt="Laravel" src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white">
+  <img alt="Blade" src="https://img.shields.io/badge/Blade-2C2C2C?style=for-the-badge&logo=laravel&logoColor=white">
+  <img alt="MySQL" src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <img alt="Alpine.js" src="https://img.shields.io/badge/Alpine.js-8BC0D0?style=for-the-badge&logo=alpinedotjs&logoColor=1F2937">
+  <img alt="PHP" src="https://img.shields.io/badge/PHP-777BB3?style=for-the-badge&logo=php&logoColor=white">
+</p>
+
+<p align="left">
+  <!-- Devicon (vector icons) -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="40" height="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" width="40" height="40"/>
+</p>
+
+> Notes:
+> - Blade is the templating engine within Laravel (badge included for clarity).
+> - Icons sourced from Shields.io and Devicon (CDN). You can reorder or resize as needed.
+
+---
+
 ## 📸 Screenshots
 
 | Dashboard (Grid) | Issue Details (Admin) |
@@ -64,8 +89,6 @@ CivicPulse is a full‑stack web application that connects citizens with local a
 | Create Report | Mobile Responsive |
 | :---: | :---: |
 | ![Create](screenshots/create_issue.png) | ![Mobile](screenshots/mobile.png) |
-
-> Tip: Replace these placeholders with your real screenshots under `screenshots/`.
 
 ---
 
@@ -99,7 +122,7 @@ DB_PASSWORD=
 ```
 
 ### 4) Create Database
-- Create a database named `civic_pulse` (phpMyAdmin/MySQL Workbench/etc.)
+Create a database named `civic_pulse` (phpMyAdmin/MySQL Workbench/etc.)
 
 ### 5) Run Migrations
 ```bash
@@ -121,12 +144,10 @@ Visit http://127.0.0.1:8000
 
 ## 🔑 Admin Setup
 
-By default, all registrations are Citizen users. To promote an account to Admin:
-
+Promote a user to Admin:
 ```bash
 php artisan tinker
 ```
-
 ```php
 $user = App\Models\User::where('email', 'admin@example.com')->first();
 $user->is_admin = true;
@@ -134,58 +155,36 @@ $user->save();
 exit
 ```
 
-Log out and log back in to see Admin controls.
-
 ---
 
-## 📦 Project Structure (Key Views)
+## 📦 Key Views
 
-- `resources/views/layouts/app.blade.php` — Base layout (navbar, theming, animations)
-- `resources/views/issues/index.blade.php` — Issues listing (grid/cards)
+- `resources/views/layouts/app.blade.php` — Base layout and theming
+- `resources/views/issues/index.blade.php` — Issues listing
 - `resources/views/issues/show.blade.php` — Issue details + admin actions
-- `resources/views/issues/create.blade.php` — Create report form
-- `resources/views/issues/edit.blade.php` — Edit report form
+- `resources/views/issues/create.blade.php` — Create form
+- `resources/views/issues/edit.blade.php` — Edit form
 - `resources/views/auth/login.blade.php` — Login
 - `resources/views/auth/register.blade.php` — Register
 
 ---
 
-## 🧪 Feature Demo (GIFs recommended)
-
-- Submit a new report (title, description, image)
-- Admin updates status in detail view
-- Edit/Delete actions visible only to the owner
-- Success toast and validation messages upon actions
-
----
-
 ## 🗺️ Roadmap
 
-- Status filters and search on dashboard
+- Filters/search on dashboard
 - Role management UI
-- Commenting on issues
+- Comments on issues
 - Email notifications for status changes
-- Basic analytics for authorities
-
----
-
-## 🧰 Developer Notes
-
-- Tailwind is loaded via CDN; you can switch to a build pipeline for production
-- Global font can be configured via Tailwind CDN config (e.g., Google Fonts “Outfit”)
-- Animations respect `prefers-reduced-motion`
+- Analytics for authorities
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!
-1. Fork the repository
+1. Fork the repo
 2. Create a feature branch
-3. Commit changes with clear messages
-4. Open a Pull Request
-
-Please include screenshots or GIFs for UI changes.
+3. Commit with clear messages
+4. Open a pull request (include screenshots/GIFs for UI changes)
 
 ---
 
@@ -195,22 +194,15 @@ MIT License. See `LICENSE` for details.
 
 ---
 
-## ✅ Next Steps (Job‑Ready Checklist)
+## ✅ Job‑Ready Checklist
 
-1. Initialize Git:
-   ```bash
-   git init
-   ```
-2. Ignore local storage uploads:
-   ```gitignore
-   /public/storage
-   ```
-3. Create a GitHub repository and push:
-   ```bash
-   git remote add origin https://github.com/yourusername/civic-pulse.git
-   git add .
-   git commit -m "Initial commit: CivicPulse"
-   git push -u origin main
-   ```
+```bash
+git init
+echo "/public/storage" >> .gitignore
+git remote add origin https://github.com/yourusername/civic-pulse.git
+git add .
+git commit -m "Initial commit: CivicPulse"
+git push -u origin main
+```
 
-You’ve built something impactful—good luck with the job hunt! 🚀
+CivicPulse makes community reporting simple and effective. 🚀
