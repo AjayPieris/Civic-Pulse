@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IssueController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,3 +29,6 @@ Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issu
 Route::put('/issues/{issue}', [IssueController::class, 'update'])->name('issues.update');
 
 Route::delete('/issues/{issue}', [IssueController::class, 'destroy'])->name('issues.destroy');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
