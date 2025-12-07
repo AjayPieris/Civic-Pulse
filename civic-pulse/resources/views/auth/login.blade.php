@@ -26,6 +26,8 @@
         </div>
 
         <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Login</button>
+        <p class="mt-4 text-center text-gray-600 text-sm">
+            Don't have an account? <a href="/register" class="text-blue-500 hover:underline">Register</a>
     </form>
 </div>
 @endsection

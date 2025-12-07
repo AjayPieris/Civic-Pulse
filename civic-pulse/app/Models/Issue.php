@@ -16,7 +16,12 @@ class Issue extends Model
         'title',          // Title of the issue
         'description',    // Description text
         'status',         // Status (example: open, closed, pending)
-        'image_path'      // Path to the image (optional)
+        'image_path' ,     // Path to the image (optional)
+        'user_id'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

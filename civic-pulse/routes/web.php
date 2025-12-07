@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Handle the delete request (DELETE)
     Route::delete('/issues/{issue}', [IssueController::class, 'destroy'])->name('issues.destroy');
+
+    Route::post('/issues/{issue}/status', [IssueController::class, 'updateStatus'])->name('issues.updateStatus');
 });
 
 
@@ -33,6 +35,9 @@ Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.sh
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 // Logout Route (Must be POST for security)
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

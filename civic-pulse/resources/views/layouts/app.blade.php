@@ -17,9 +17,11 @@
                 @auth
                 <span class="text-gray-200 mr-4">Hi, {{ auth()->user()->name }}</span>
 
+                @unless(auth()->user()->is_admin)
                 <a href="/issues/create" class="bg-white text-blue-600 px-3 py-1 rounded font-semibold hover:bg-gray-100 mr-2">
                     + Report
                 </a>
+                @endunless
 
                 <form action="/logout" method="POST" class="inline">
                     @csrf
@@ -36,9 +38,23 @@
     </nav>
 
     <div class="max-w-4xl mx-auto mt-8 px-4">
+        
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
+
         @yield('content')
     </div>
-
 
 </body>
 
