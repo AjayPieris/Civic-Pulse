@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +7,59 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+        --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+                'Segoe UI Symbol', 'Noto Color Emoji';
+
+        --color-bg: #0f172a;
+        --color-surface: #111827;
+        --color-text: #e5e7eb;
+        --color-muted: #9ca3af;
+        --color-primary: #3b82f6;
+        --color-primary-700: #2563eb;
+        --color-accent: #22d3ee;
+}
+
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slide-up { from { transform: translateY(14px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+@keyframes scale-in { from { transform: scale(.98); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+@keyframes pulse-soft { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.03) } }
+
+@utility animate-fade-in { animation: fade-in .4s ease-out both; }
+@utility animate-slide-up { animation: slide-up .45s ease-out both; }
+@utility animate-scale-in { animation: scale-in .35s ease-out both; }
+@utility animate-pulse-soft { animation: pulse-soft 1.6s ease-in-out infinite; }
+
+/* Components */
+.cp-container { max-width: 1100px; margin-inline: auto; padding: 1.25rem; }
+.cp-card { 
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.cp-btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white transition;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+}
+.cp-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.35); border-color: rgba(255,255,255,0.18); }
+.cp-btn-primary { background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-700) 100%); border-color: transparent; }
+.cp-input {
+    @apply w-full px-3 py-2 rounded-xl text-slate-100 outline-none transition;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+}
+.cp-input::placeholder { color: var(--color-muted); }
+.cp-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(59,130,246,0.25); }
+
+.shimmer {
+    position: relative;
+    background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.06) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
 }

@@ -3,49 +3,80 @@
 @section('title', 'Report Issue')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white p-8 rounded shadow">
-    <h1 class="text-2xl font-bold mb-6">Report a New Issue</h1>
-
-    <form method="POST" action="/issues" enctype="multipart/form-data">
-        @csrf
-
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Title</label>
-            <input type="text" name="title"
-                class="w-full border p-2 rounded @error('title') border-red-500 @enderror"
-                value="{{ old('title') }}"
-                placeholder="e.g. Broken Street Light">
-
-            @error('title')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+<section class="mx-auto max-w-3xl animate-fade-in-up">
+    <div class="rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-md shadow-xl shadow-black/30">
+        <div class="px-5 py-4 border-b border-white/10">
+            <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Report a New Issue</h1>
+            <p class="mt-1 text-sm text-slate-300">Share details to help the community address problems faster.</p>
         </div>
 
-        <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2">Description</label>
-            <textarea name="description" rows="5"
-                class="w-full border p-2 rounded @error('description') border-red-500 @enderror"
-                placeholder="Describe the issue details...">{{ old('description') }}</textarea>
+        <div class="px-5 py-6">
+            <form method="POST" action="/issues" enctype="multipart/form-data" class="space-y-6">
+                @csrf
 
-            @error('description')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2">Attach Image (Optional)</label>
-            <input type="file" name="image" class="w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                <!-- Title -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ old('title') }}"
+                        placeholder="e.g. Broken Street Light"
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title') ring-2 ring-red-500 @enderror"
+                    >
+                    @error('title')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
 
-            @error('image')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Description</label>
+                    <textarea
+                        name="description"
+                        rows="5"
+                        placeholder="Describe the issue details, location, and any steps to reproduce..."
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description') ring-2 ring-red-500 @enderror"
+                    >{{ old('description') }}</textarea>
+                    @error('description')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
 
-        <div class="flex justify-end gap-4">
-            <a href="/issues" class="text-gray-600 px-4 py-2 hover:underline">Cancel</a>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                Submit Report
-            </button>
+                <!-- Image -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Attach Image (Optional)</label>
+                    <input
+                        type="file"
+                        name="image"
+                        class="block w-full text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-slate-100 hover:file:bg-white/15 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                    @error('image')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                    <p class="mt-2 text-xs text-slate-500">Accepted formats: JPG, PNG. Max size per your validation rules.</p>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-end gap-3 pt-2">
+                    <a
+                        href="/issues"
+                        class="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/30 focus:ring-offset-slate-900"
+                    >
+                        Cancel
+                    </a>
+                    <button
+                        type="submit"
+                        class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:from-blue-500 hover:to-indigo-500 hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Submit Report
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+</section>
 @endsection

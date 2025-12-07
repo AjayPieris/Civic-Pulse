@@ -3,40 +3,95 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="max-w-md mx-auto bg-white p-8 rounded shadow">
-    <h1 class="text-2xl font-bold mb-6 text-center">Create an Account</h1>
-
-    <form method="POST" action="/register">
-        @csrf
-
-        <div class="mb-4">
-            <label class="block text-gray-700">Name</label>
-            <input type="text" name="name" value="{{ old('name') }}" class="w-full border p-2 rounded" required>
-            @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+<section class="mx-auto max-w-md animate-fade-in-up">
+    <div class="rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-md shadow-xl shadow-black/30">
+        <div class="px-5 py-6 border-b border-white/10 text-center">
+            <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Create an Account</h1>
+            <p class="mt-2 text-sm text-slate-300">Join CivicPulse to report issues and track community progress.</p>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700">Email</label>
-            <input type="email" name="email" value="{{ old('email') }}" class="w-full border p-2 rounded" required>
-            @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
+        <div class="px-5 py-6">
+            <form method="POST" action="/register" class="space-y-5">
+                @csrf
 
-        <div class="mb-6">
-            <label class="block text-gray-700">Password</label>
-            <input type="password" name="password" class="w-full border p-2 rounded" required>
-            @error('password') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
+                <!-- Name -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
+                        required
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') ring-2 ring-red-500 @enderror"
+                        placeholder="Your full name"
+                    >
+                    @error('name')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
 
-        <div class="mb-6">
-            <label class="block text-gray-700">Confirm Password</label>
-            <input type="password" name="password_confirmation" class="w-full border p-2 rounded" required>
-        </div>
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') ring-2 ring-red-500 @enderror"
+                        placeholder="you@example.com"
+                    >
+                    @error('email')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
 
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Register</button>
-    </form>
-    
-    <p class="mt-4 text-center text-gray-600 text-sm">
-        Already have an account? <a href="/login" class="text-blue-500 hover:underline">Login</a>
-    </p>
-</div>
+                <!-- Password -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('password') ring-2 ring-red-500 @enderror"
+                        placeholder="Minimum 8 characters"
+                    >
+                    @error('password')
+                        <p class="mt-2 text-xs text-red-400">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-200 mb-2">Confirm Password</label>
+                    <input
+                        type="password"
+                        name="password_confirmation"
+                        required
+                        class="w-full rounded-lg border border-white/10 bg-slate-900/60 px-3 py-2 text-slate-100 shadow-inner placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Re-enter your password"
+                    >
+                </div>
+
+                <!-- Submit -->
+                <div class="pt-2">
+                    <button
+                        type="submit"
+                        class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:from-blue-500 hover:to-indigo-500 hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Register
+                    </button>
+                </div>
+            </form>
+
+            <p class="mt-6 text-center text-sm text-slate-300">
+                Already have an account?
+                <a href="/login" class="font-medium text-blue-300 hover:text-blue-200 transition-colors">Login</a>
+            </p>
+        </div>
+    </div>
+</section>
 @endsection
